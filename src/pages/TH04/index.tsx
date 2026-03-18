@@ -2,8 +2,6 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { Tabs } from 'antd';
 import { useModel } from 'umi'; // Hook quan trọng nhất của Umi
 import CauHinhBieuMau from './CauHinhBieuMau';
-import SoVanBangForm from './QuanLySoQuyetDinh';
-import QuyetDinhForm from './QuyetDinhForm';
 import ThongTinVanBang from './ThongTinVanBang';
 import TraCuuVanBang from './TraCuuVanBang';
 import { QuyetDinh, SoVanBang } from './utils';
@@ -13,8 +11,6 @@ import QuanLy from './KetHop';
 const Bai4Main = () => {
 	// Gọi đúng tên model "localStorage" (tương ứng với tên file localStorage.ts)
 	const storageModel = useModel('TH04.localStorage');
-	const [soVanBang, setSoVanBang] = useState<SoVanBang[]>([]);
-	const [quyetDinh, setQuyetDinh] = useState<QuyetDinh[]>([]);
 
 	return (
 		<PageContainer title='HỆ THỐNG QUẢN LÝ VĂN BẰNG (TH04) - PTIT'>
