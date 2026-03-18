@@ -10,7 +10,6 @@ const QuanLy = () => {
 	return (
 		<div style={{ padding: 24 }}>
 			<SoVanBangForm soVanBang={soVanBang} setSoVanBang={setSoVanBang} />
-
 			<QuyetDinhForm
 				quyetDinh={quyetDinh}
 				setQuyetDinh={setQuyetDinh}

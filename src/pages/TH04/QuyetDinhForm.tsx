@@ -31,6 +31,7 @@ const QuyetDinhForm = ({ quyetDinh, setQuyetDinh, soVanBang, setSoVanBang }: Pro
 				return so ? `Năm ${so.year}` : '';
 			},
 		},
+		{ title: 'Số vào sổ', dataIndex: 'soHienTai' },
 		{
 			title: 'Thao tác',
 			render: (_: any, record: QuyetDinh) => (
@@ -83,22 +84,24 @@ const QuyetDinhForm = ({ quyetDinh, setQuyetDinh, soVanBang, setSoVanBang }: Pro
 				message.error('Sổ không tồn tại');
 				return;
 			}
-
 			const so = soVanBang[soIndex];
 
 			if (editing) {
 				setQuyetDinh(quyetDinh.map((item) => (item.id === editing.id ? { ...item, ...values } : item)));
 				message.success('Cập nhật quyết định');
 			} else {
+				// Số vào sổ = currentNumber + 1
+				const soHienTai = so.currentNumber + 1;
 				const newItem: QuyetDinh = {
 					id: Date.now(),
 					soQD: values.soQD,
 					ngayBanHanh: values.ngayBanHanh,
 					trichYeu: values.trichYeu,
 					soVanBangId: values.soVanBangId,
-					soHienTai: so.currentNumber,
+					soHienTai, // khởi tạo từ currentNumber + 1
 				};
-				soVanBang[soIndex] = { ...so, currentNumber: so.currentNumber + 1 };
+				// Cập nhật currentNumber của sổ
+				soVanBang[soIndex] = { ...so, currentNumber: soHienTai };
 				setSoVanBang([...soVanBang]);
 				setQuyetDinh([...quyetDinh, newItem]);
 				message.success('Thêm quyết định thành công');

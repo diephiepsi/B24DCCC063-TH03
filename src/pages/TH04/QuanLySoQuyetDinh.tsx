@@ -1,6 +1,5 @@
-// SoVanBangForm.tsx
 import { useState } from 'react';
-import { Table, Button, Modal, Form, Input, message, Popconfirm } from 'antd';
+import { Table, Button, Modal, Form, Input, message } from 'antd';
 import { SoVanBang } from './utils';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const SoVanBangForm = ({ soVanBang, setSoVanBang }: Props) => {
 	const [open, setOpen] = useState(false);
 	const [editing, setEditing] = useState<SoVanBang | null>(null);
-	const [form] = Form.useForm<{ year: number }>();
+	const [form] = Form.useForm();
 
 	const columns = [
 		{ title: 'ID', dataIndex: 'id' },
@@ -22,13 +21,11 @@ const SoVanBangForm = ({ soVanBang, setSoVanBang }: Props) => {
 			render: (_: any, record: SoVanBang) => (
 				<>
 					<Button type='link' onClick={() => handleEdit(record)}>
-						Xem
+						Sửa
 					</Button>
-					<Popconfirm title='Xóa sổ này?' onConfirm={() => handleDelete(record.id)}>
-						<Button type='link' danger>
-							Xóa
-						</Button>
-					</Popconfirm>
+					<Button type='link' danger onClick={() => handleDelete(record.id)}>
+						Xóa
+					</Button>
 				</>
 			),
 		},
@@ -48,52 +45,42 @@ const SoVanBangForm = ({ soVanBang, setSoVanBang }: Props) => {
 
 	const handleDelete = (id: number) => {
 		setSoVanBang(soVanBang.filter((item) => item.id !== id));
-		message.success('Đã xóa');
+		message.success('Đã xóa sổ');
 	};
 
 	const handleSubmit = async () => {
 		try {
 			const values = await form.validateFields();
-			const year = Number(values.year);
-			const existed = soVanBang.find((item) => item.year === year);
-			if (existed) {
-				message.error('Năm đã tồn tại');
-				return;
+			if (editing) {
+				setSoVanBang(soVanBang.map((item) => (item.id === editing.id ? { ...item, ...values } : item)));
+				message.success('Cập nhật sổ thành công');
+			} else {
+				const newItem: SoVanBang = {
+					id: Date.now(),
+					year: values.year,
+					currentNumber: 0,
+				};
+				setSoVanBang([...soVanBang, newItem]);
+				message.success('Thêm sổ thành công');
 			}
-
-			const newItem: SoVanBang = {
-				id: Date.now(),
-				year,
-				currentNumber: 0,
-			};
-
-			setSoVanBang([...soVanBang, newItem]);
-			message.success('Thêm sổ thành công');
 			setOpen(false);
 			form.resetFields();
 		} catch {
-			message.error('Lỗi nhập liệu');
+			message.error('Lỗi');
 		}
 	};
 
 	return (
-		<div style={{ padding: 16, background: '#fff' }}>
+		<div style={{ marginBottom: 24, padding: 16, background: '#fff' }}>
 			<h3>Quản lý sổ văn bằng</h3>
 			<Button type='primary' onClick={handleAdd} style={{ marginBottom: 12 }}>
 				Thêm
 			</Button>
-			<Table rowKey='id' columns={columns} dataSource={[...soVanBang].sort((a, b) => b.year - a.year)} />
-			<Modal
-				title={editing ? 'Chi tiết' : 'Thêm'}
-				visible={open}
-				onOk={handleSubmit}
-				onCancel={() => setOpen(false)}
-				okText='Lưu'
-				cancelText='Hủy'
-			>
+			<Table rowKey='id' columns={columns} dataSource={soVanBang} />
+			<Modal visible={open} title={editing ? 'Sửa sổ' : 'Thêm sổ'} onOk={handleSubmit} onCancel={() => setOpen(false)}>
 				<Form form={form} layout='vertical'>
 					<Form.Item name='year' label='Năm' rules={[{ required: true, message: 'Nhập năm' }]}>
-						<Input type='number' disabled={!!editing} />
+						<Input type='number' />
 					</Form.Item>
 				</Form>
 			</Modal>
