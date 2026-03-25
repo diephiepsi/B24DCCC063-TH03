@@ -119,17 +119,22 @@
 		component: './TH03/index',
 	},
 	{
-  		path: '/thuc-hanh-04',
-  		name: 'Bài thực hành 04',
-  		icon: 'FileProtectOutlined', 
-  		routes: [
-    		{
-      		path: '/thuc-hanh-04/quan-ly',
-      		name: 'Quản lý văn bằng',
-      		icon: 'BookOutlined',
-      		component: './TH04/index', 
-    		},
-    
-  		],
+		path: '/thuc-hanh-04',
+		name: 'Bài thực hành 04',
+		icon: 'FileProtectOutlined',
+		routes: [
+			{
+				path: '/thuc-hanh-04/quan-ly',
+				name: 'Quản lý văn bằng',
+				icon: 'BookOutlined',
+				component: './TH04/index',
+			},
+		],
+	},
+	{
+		path: '/thuc-hanh-05',
+		name: 'Bài thực hành 05',
+		icon: 'ScheduleOutlined',
+		component: './CLB/QuanLyDangKy',
 	},
 ];
