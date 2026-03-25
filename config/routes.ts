@@ -37,19 +37,6 @@
 		icon: 'ArrowsAltOutlined',
 	},
 
-	// DANH MUC HE THONG
-	// {
-	// 	name: 'DanhMuc',
-	// 	path: '/danh-muc',
-	// 	icon: 'copy',
-	// 	routes: [
-	// 		{
-	// 			name: 'ChucVu',
-	// 			path: 'chuc-vu',
-	// 			component: './DanhMuc/ChucVu',
-	// 		},
-	// 	],
-	// },
 
 	{
 		path: '/notification',
@@ -132,4 +119,6 @@
     // Bạn có thể thêm các route con khác ở đây nếu muốn tách trang riêng
   ],
 },
+
+
 ];

@@ -17,7 +17,7 @@ const Bai4Main = () => {
 					<CauHinhBieuMau {...storageModel} />
 				</Tabs.TabPane>
 				<Tabs.TabPane tab='2. Quyết định & Sổ' key='2'>
-					
+					<QuanLy/>
 				</Tabs.TabPane>
 				<Tabs.TabPane tab='3. Thông tin văn bằng' key='3'>
 					<ThongTinVanBang {...storageModel} />
