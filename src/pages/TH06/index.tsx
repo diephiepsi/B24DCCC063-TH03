@@ -3,13 +3,13 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { Tabs, Card } from 'antd';
 import { useModel } from 'umi';
 
-import Explore from './components/Home';
+import Explore from './components/Explore';
 import Itinerary from './components/Itinerary';
 import BudgetManager from './components/BudgetManager';
 import Admin from './components/Admin';
 
 const TH06Index: React.FC = () => {
-  // LƯU Ý: Phải gọi đúng tên model kèm folder nếu bạn để trong folder con
+  // Model nằm trong folder localStorage nên tên gọi là 'localStorage.th06'
   const model = useModel('localStorage.th06' as any); 
 
   return (
