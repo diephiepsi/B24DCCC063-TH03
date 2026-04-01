@@ -38,10 +38,3 @@ export interface MemberRecord {
 	history: Log[];
 }
 
-interface Props {
-	data: MemberRecord[];
-	clubs: { id: string; name: string }[];
-	onChange: (d: MemberRecord[]) => void;
-	role: 'admin' | 'user';
-	setRole: (r: 'admin' | 'user') => void;
-}
